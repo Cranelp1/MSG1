@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Un hermoso día</title>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(135deg, #c2185b, #ad1457);
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            position: absolute;
+            top: 45%;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-size: 42px;
+
+            /* Brillo de las letras */
+            text-shadow:
+                0 0 5px white,
+                0 0 10px white,
+                0 0 20px #ff80ab,
+                0 0 30px #ff4081,
+                0 0 40px #ff4081;
+
+            z-index: 10;
+        }
+
+        .corazon {
+            position: absolute;
+            width: var(--tamaño);
+            height: var(--tamaño);
+            transform: rotate(-45deg);
+            animation: aparecer var(--duracion) ease-in-out forwards;
+        }
+
+        .corazon::before,
+        .corazon::after {
+            content: "";
+            position: absolute;
+            width: var(--tamaño);
+            height: var(--tamaño);
+            border-radius: 50%;
+            background: inherit;
+        }
+
+        .corazon::before {
+            top: calc(var(--tamaño) * -0.5);
+            left: 0;
+        }
+
+        .corazon::after {
+            top: 0;
+            left: calc(var(--tamaño) * 0.5);
+        }
+
+        @keyframes aparecer {
+            0% {
+                transform: rotate(-45deg) scale(0);
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 1;
+            }
+
+            80% {
+                opacity: 0.9;
+            }
+
+            100% {
+                transform: rotate(-45deg) scale(1);
+                opacity: 0;
+            }
+        }
+
+        .rojo {
+            background: #ff1744;
+        }
+
+        .rosado {
+            background: #ff80ab;
+        }
+
+        .blanco {
+            background: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>¡Que tengas un hermoso día! ❤️</h1>
+
+    <script>
+
+        function crearCorazon() {
+
+            const corazon = document.createElement("div");
+
+            corazon.classList.add("corazon");
+
+            const colores = ["rojo", "rosado", "blanco"];
+
+            const color =
+                colores[Math.floor(Math.random() * colores.length)];
+
+            corazon.classList.add(color);
+
+            corazon.style.left =
+                Math.random() * 97 + "vw";
+
+            corazon.style.top =
+                Math.random() * 92 + "vh";
+
+            const tamaño =
+                10 + Math.random() * 45;
+
+            corazon.style.setProperty(
+                "--tamaño",
+                tamaño + "px"
+            );
+
+            const duracion =
+                1.5 + Math.random() * 3;
+
+            corazon.style.setProperty(
+                "--duracion",
+                duracion + "s"
+            );
+
+            document.body.appendChild(corazon);
+
+            setTimeout(() => {
+                corazon.remove();
+            }, (duracion + 0.5) * 1000);
+        }
+
+        setInterval(crearCorazon, 100);
+
+    </script>
+
+</body>
+</html>
