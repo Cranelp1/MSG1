@@ -15,21 +15,43 @@
     </script>
 
     <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
-            height: 100vh;
+            min-height: 100vh;
             overflow: hidden;
             background: linear-gradient(135deg, #c2185b, #ad1457);
             font-family: Arial, sans-serif;
         }
 
+        /* MENSAJE */
         h1 {
             position: absolute;
-            top: 45%;
-            width: 100%;
+
+            /* CENTRADO PERFECTO */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            width: 90%;
+            max-width: 900px;
+
+            margin: 0;
+            padding: 20px;
+
             text-align: center;
+
             color: white;
-            font-size: 42px;
+
+            /* Tamaño adaptable */
+            font-size: clamp(28px, 5vw, 52px);
+
+            /* Espacio entre líneas */
+            line-height: 1.35;
 
             text-shadow:
                 0 0 5px white,
@@ -41,21 +63,28 @@
             z-index: 10;
         }
 
+        /* CORAZONES */
         .corazon {
             position: absolute;
             width: var(--tamaño);
             height: var(--tamaño);
+
             transform: rotate(-45deg);
+
             animation: aparecer var(--duracion) ease-in-out forwards;
         }
 
         .corazon::before,
         .corazon::after {
             content: "";
+
             position: absolute;
+
             width: var(--tamaño);
             height: var(--tamaño);
+
             border-radius: 50%;
+
             background: inherit;
         }
 
@@ -69,7 +98,9 @@
             left: calc(var(--tamaño) * 0.5);
         }
 
+        /* ANIMACIÓN */
         @keyframes aparecer {
+
             0% {
                 transform: rotate(-45deg) scale(0);
                 opacity: 0;
@@ -89,6 +120,7 @@
             }
         }
 
+        /* COLORES */
         .rojo {
             background: #ff1744;
         }
@@ -100,13 +132,54 @@
         .blanco {
             background: #ffffff;
         }
+
+
+        /* =========================
+           AJUSTES PARA CELULARES
+           ========================= */
+
+        @media (max-width: 600px) {
+
+            h1 {
+                width: 92%;
+
+                padding: 10px;
+
+                font-size: 30px;
+
+                line-height: 1.4;
+            }
+
+        }
+
+
+        /* CELULARES MUY PEQUEÑOS */
+
+        @media (max-width: 380px) {
+
+            h1 {
+                width: 94%;
+
+                font-size: 26px;
+
+                line-height: 1.4;
+            }
+
+        }
+
     </style>
 </head>
 
+
 <body>
 
-    <h1>Buenas noches 😊🌙 Espero que hayas tenido un buen día. Que descanses mucho y que mañana tengas un excelente día. Que duermas bien y que todo te salga muy bien mañana. ✨
-</h1>
+    <h1>
+        Buenas noches 😊🌙<br>
+        Espero que hayas tenido un buen día.<br>
+        Que descanses mucho y que mañana tengas un excelente día.<br>
+        Que duermas bien y que todo te salga muy bien mañana. ✨
+    </h1>
+
 
     <script>
 
@@ -116,18 +189,35 @@
 
             corazon.classList.add("corazon");
 
-            const colores = ["rojo", "rosado", "blanco"];
+
+            /* COLORES */
+
+            const colores = [
+                "rojo",
+                "rosado",
+                "blanco"
+            ];
 
             const color =
-                colores[Math.floor(Math.random() * colores.length)];
+                colores[
+                    Math.floor(
+                        Math.random() * colores.length
+                    )
+                ];
 
             corazon.classList.add(color);
+
+
+            /* POSICIÓN */
 
             corazon.style.left =
                 Math.random() * 97 + "vw";
 
             corazon.style.top =
                 Math.random() * 92 + "vh";
+
+
+            /* TAMAÑO */
 
             const tamaño =
                 10 + Math.random() * 45;
@@ -137,6 +227,9 @@
                 tamaño + "px"
             );
 
+
+            /* DURACIÓN */
+
             const duracion =
                 1.5 + Math.random() * 3;
 
@@ -145,12 +238,24 @@
                 duracion + "s"
             );
 
+
+            /* CREAR */
+
             document.body.appendChild(corazon);
 
+
+            /* ELIMINAR */
+
             setTimeout(() => {
+
                 corazon.remove();
+
             }, (duracion + 0.5) * 1000);
+
         }
+
+
+        /* CREAR CORAZONES */
 
         setInterval(crearCorazon, 100);
 
